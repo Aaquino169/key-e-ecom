@@ -136,10 +136,9 @@ logout = async () => {
                 method: 'PUT',
                 headers:{
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(id),
+                }
             })
-            console.log(JSON.stringify(id))
+            console.log('Jsonstring: '+ JSON.stringify(id))
             console.log('addToCartResponse ', addToCartResponse)
             const addToCartJson = await addToCartResponse.json()
         } catch(err){
