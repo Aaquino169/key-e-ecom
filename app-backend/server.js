@@ -23,11 +23,8 @@ app.use(cors(corsOptions))
 
 app.use(bodyParser.json());
 
-
 //middleware for sessions
 app.use( session({ secret: 'i love shopping',resave: false,saveUninitialized: false}))
-
-
 
 //middleware for mongoose
 mongoose.connect('mongodb://localhost:27017/store_db', { useNewUrlParser:true })

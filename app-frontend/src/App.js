@@ -57,7 +57,8 @@ login = async (loginInfo) => {
       body: JSON.stringify(loginInfo),
       headers: {
         'Content-Type': 'application/json'
-      }
+        },
+      credentials: "include"
     })
     console.log("loginResponse", loginResponse);
     const loginJson = await loginResponse.json()
@@ -103,6 +104,50 @@ logout = async () => {
   }
 }
 
+
+    // update quantity U
+    emptyCart = async () =>{
+        const url =process.env.REACT_APP_API_URL + 'user/emptyCart'
+        try{
+            const emptyCartResponse = await fetch(url,{
+                method: 'PUT',
+                headers:{
+                    'Content-Type': 'application/json'
+
+                },
+                credentials: "include"
+            })
+            const emptyCartJson = await emptyCartResponse.json()
+            console.log(emptyCartJson)
+
+            this.setState({
+                cart : []
+            })
+            }catch(err){
+                console.log('Error with buy merch: ',err)
+        }
+    }
+
+    addToCart = async (id) => {
+        try{
+            const url = process.env.REACT_APP_API_URL + 'user/addToCart/' + id;
+            const addToCartResponse = await fetch(url,{
+                credentials: 'include',
+                method: 'PUT',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(id),
+            })
+            console.log(JSON.stringify(id))
+            console.log('addToCartResponse ', addToCartResponse)
+            const addToCartJson = await addToCartResponse.json()
+        } catch(err){
+            console.log('Error adding Merch', err)
+        }
+    }
+
+
   render() {
     return (
       <div className="App">
@@ -113,7 +158,7 @@ logout = async () => {
                   <React.Fragment>
 
                     <NavBar username={this.state.loggedInUsername} logout={this.logout} id={this.state.id} />
-                    <MerchContainer cart={this.state.cart}/>
+                    <MerchContainer id={this.state.id} emptyCart={this.emptyCart} cart={this.state.cart} addToCart={this.addToCart}/>
                   </React.Fragment>
                   :
                   <UserLogin
