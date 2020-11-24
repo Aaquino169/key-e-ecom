@@ -5,6 +5,7 @@ const merchSchema = mongoose.Schema({
     type:{type:String, require:true},
     img: String,
     price: {type:Number, require:true},
+    quantity:{type:Number, require:true},
     description: {type:String, require:true},
     reviews: []
 })

@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
+const Merch = require("../models/merch")
 
 const userSchema = mongoose.Schema({
-    email: {type:String, require:true},
-    user: {type:String, require:true},
+    username: {type:String, require:true},
     password: {type:String, require:true},
-    cart: []
+    cart: [Merch.schema],
+    orderHistory:[]
 })
+
+const Users = mongoose.model('Users', userSchema)
+module.exports = Users
