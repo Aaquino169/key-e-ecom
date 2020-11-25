@@ -22,7 +22,7 @@ export default class App extends Component {
 
 register = async (registerInfo) => {
 
-  const url = 'http://localhost:8000/user/new'
+  const url = 'http://localhost:8000/' + 'user/new'
 
   try {
       const registerResponse = await fetch(url, {
@@ -49,7 +49,7 @@ register = async (registerInfo) => {
 }
 
 login = async (loginInfo) => {
-  const url = 'http://localhost:8000/login/'
+  const url = 'http://localhost:8000/' + 'login/'
 
   try {
     const loginResponse = await fetch(url, {
@@ -79,35 +79,9 @@ login = async (loginInfo) => {
   }
 }
 
-logout = async () => {
-  try {
-    const url = ''
-
-    const logoutResponse = await fetch(url, {
-      credentials: 'include'
-    })
-    console.log("logoutResponse", logoutResponse);
-    const logoutJson = await logoutResponse.json()
-    console.log("logoutJson", logoutJson);
-
-    if(logoutResponse.status === 200) {
-      this.setState({
-        loggedIn: false,
-        loggedInUsername: ''
-      })
-
-    }
-
-  } catch(error) {
-    console.error("Error logging out")
-    console.error(error)
-  }
-}
-
-
     // update quantity U
     emptyCart = async () =>{
-        const url =process.env.REACT_APP_API_URL + 'user/emptyCart'
+        const url = 'http://localhost:8000/' + 'user/buyCart'
         try{
             const emptyCartResponse = await fetch(url,{
                 method: 'PUT',
@@ -130,7 +104,7 @@ logout = async () => {
 
     addToCart = async (id) => {
         try{
-            const url = process.env.REACT_APP_API_URL + 'user/addToCart/' + id;
+            const url = 'http://localhost:8000/' + 'user/addToCart/' + id;
             const addToCartResponse = await fetch(url,{
                 credentials: 'include',
                 method: 'PUT',
@@ -138,7 +112,7 @@ logout = async () => {
                     'Content-Type': 'application/json'
                 }
             })
-            console.log('Jsonstring: '+ JSON.stringify(id))
+
             console.log('addToCartResponse ', addToCartResponse)
             const addToCartJson = await addToCartResponse.json()
         } catch(err){
